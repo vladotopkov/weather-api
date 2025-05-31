@@ -69,12 +69,19 @@
     margin: 0.3rem 0;
   }
   
-  /* .hidden {
+  .hidden {
     display: none;
-  } */
+  }
   
   .error-message {
     color: red;
     margin-top: 1rem;
   }
   
+  .search-box select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background-color: white;
+    font-size: 1rem;
+  }

@@ -10,16 +10,20 @@
   <div class="container">
     <h1>Weather App</h1>
     <div class="search-box">
-      <input type="text" id="city-input" placeholder="Enter city name..." value="Belarus"/>
-      <button id="search-btn">Search</button>
-    </div>
+        <input type="text" id="city-input" placeholder="Enter city name..." value="Belarus"/>
+        <select id="unit-select">
+          <option value="c">°C</option>
+          <option value="f">°F</option>
+        </select>
+        <button id="search-btn">Search</button>
+      </div>
 
     <div class="weather-info hidden" id="weather-info">
       <h2 id="city-name">City Name</h2>
       <div class="temp" id="temperature">--°C</div>
       <div class="description" id="description">--</div>
       <div class="details">
-        <div>Humidity: <span id="humidity">--%</span></div>
+        <!-- <div>Humidity: <span id="humidity">--%</span></div> -->
         <div>Wind: <span id="wind">-- km/h</span></div>
       </div>
     </div>
