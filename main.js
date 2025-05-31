@@ -19,25 +19,37 @@ setTimeout(() => showFirst(), 100); //previev page
 
 
 searchButton.addEventListener('click', () => {
+    
+    setTimeout(() => getWeatherData(), 100);
+});
+
+
+function getWeatherData() {
     getCityName();
     getTempType();
-    if(tempType === 'c'){
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
-    .then(res => res.json())
-    .then(data => {
-        myData = data;
-        parseData();
-    });
-    }else {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`)
-        .then(res => res.json())
+
+    const unitParam = tempType === 'c' ? 'metric' : 'imperial';
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unitParam}`;
+
+    fetch(url)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("City not found or API error.");
+            }
+            return res.json();
+        })
         .then(data => {
             myData = data;
             parseData();
+            weatherInfo.classList.remove('hidden');
+            document.getElementById('error-message').classList.add('hidden');
+        })
+        .catch(error => {
+            console.error(error.message);
+            weatherInfo.classList.add('hidden');
+            document.getElementById('error-message').classList.remove('hidden');
         });
-    }
-    setTimeout(() => weatherInfo.classList.remove('hidden'), 100);
-});
+}
 
 
 function getCityName(){
@@ -56,7 +68,8 @@ function parseData() {
         windSpeed.innerHTML = `${myData.wind.speed} ${tempType === 'c' ? 'm/s' : 'miles/hour'}`;
 }
 
-
 function showFirst(){
     searchButton.click();
 }
+
+
